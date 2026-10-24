@@ -4,7 +4,7 @@
 🌐 DGTL-HIDE - Photo Hide & Secure Share
 
 <p align="center">
-  <img src="https://github.com/shahid2005a/DGTL-HIDE/blob/main/DGTL-HIDE.png" alt="DGTL-HIDE Logo" width="350"/>
+  <img src="https://github.com/shahid2005a/DGTL-HIDE/blob/main/DGTL%20HIDE/Dgtlhide.png" alt="DGTL-HIDE Logo" width="350"/>
 </p>
 
 <p align="center">
