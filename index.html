@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGTL Photo Hide | Ultra Premium Secure</title>
+    <link rel="icon" type="image/jpeg" href="https://i.ibb.co/2Y66NwKC/IMG-e2498c1b-83ba-4e04-a344-966fa13be83a.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --secondary: #ff0055;
+            --accent: #7000ff;
+            --bg-dark: #020204;
+            --bg-card: rgba(10, 10, 15, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #8888a0;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --glass-blur: blur(25px);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(0, 255, 204, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+        
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 40%, var(--accent) 80%, var(--secondary) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            animation: shine 4s linear infinite;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 204, 0.2));
+            line-height: 1.1;
+        }
+        
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+        
+        .tagline {
+            color: var(--text-muted);
+            font-size: clamp(0.8rem, 3vw, 1.1rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .author {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 8px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .author span { color: var(--primary); }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+            perspective: 1000px;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 28px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -20px 40px rgba(0,0,0,0.4);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            transform-style: preserve-3d;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.5;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255,255,255,0.2),
+                0 0 40px rgba(0, 255, 204, 0.05);
+            border-color: rgba(0, 255, 204, 0.2);
+        }
+        
+        /* PREMIUM BANNER IMAGE FIX */
+        .card-banner {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .card-header {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            height: 65px;
+            border: 2px dashed rgba(255,255,255,0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            background: rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .file-upload-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+        
+        .file-upload-wrapper:hover::before {
+            left: 100%;
+        }
+        
+        .file-upload-wrapper:hover {
+            border-color: var(--primary);
+            background: rgba(0, 255, 204, 0.03);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+        }
+        
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-upload-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-upload-text::before {
+            content: '📁';
+            font-size: 1.2rem;
+        }
+        
+        input[type="password"], textarea { 
+            width: 100%;
+            padding: 18px 20px; 
+            border-radius: 18px; 
+            border: 1px solid rgba(255, 255, 255, 0.06); 
+            font-size: 1rem; 
+            background: rgba(0, 0, 0, 0.4); 
+            color: #fff; 
+            outline: none;
+            transition: all 0.4s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.4);
+        }
+        
+        input[type="password"]:focus, textarea:focus {
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 0 4px rgba(0, 255, 204, 0.1), inset 0 4px 8px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+        
+        input[type="password"]::placeholder, textarea::placeholder {
+            color: #555;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        button { 
+            width: 100%;
+            padding: 18px; 
+            border-radius: 18px;
+            border: none;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #990033 100%);
+            color: white;
+            box-shadow: 0 15px 35px rgba(255, 0, 85, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(255, 0, 85, 0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+            padding: 14px;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 22px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            animation: slideDown 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 0 30px rgba(0, 255, 204, 0.05), 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .result-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .image-preview {
+            width: 100%;
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: contain;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0,255,204,0.1);
+            animation: fadeIn 0.8s ease-out;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        
+        .instructions {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            padding: 35px;
+            border-radius: 28px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instructions::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(112,0,255,0.1) 0%, transparent 70%);
+            filter: blur(20px);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 25px;
+            color: #fff;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .instructions h3::before {
+            content: '💡';
+            font-size: 1.5rem;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+        
+        .instructions li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+        
+        .instructions strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #444;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 20px;
+            left: 20px;
+            padding: 15px 20px;
+            border-radius: 16px;
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: translateY(-150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+        }
+        
+        .notification.success {
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0,255,204,0.1);
+        }
+        
+        .notification.error {
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255,0,85,0.1);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        @media (max-width: 850px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .logo { 
+                font-size: 2.5rem; 
+            }
+            .card {
+                padding: 25px 20px;
+                border-radius: 22px;
+            }
+            .header {
+                padding: 20px 0;
+            }
+            .app-container {
+                padding: 20px 15px;
+            }
+            .instructions {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <div class="app-container">
+        <div class="header">
+            <div class="logo">DGTL Photo Hide</div>
+            <div class="tagline">Ultra Secure Image Sharing</div>
+            <div class="author">By <span>Aryan</span> - Dgtl Cyber</div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="card">
+                <!-- IMAGE 1 UPDATED -->
+                <img src="https://i.ibb.co/HDDBf6NK/IMG-88bf30e4-24fd-4d4a-b12b-777e852bf559.jpg" alt="DGTL Banner" class="card-banner">
+                <div class="card-header">
+                    <div class="card-icon">🔒</div>
+                    <div class="card-title">Encrypt Photo</div>
+                </div>
+                <p>Select an image and set a password to generate a secure, encrypted link.</p>
+                
+                <div class="form-group">
+                    <label>Select Image</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="imageInput" accept="image/*" required>
+                        <div class="file-upload-text" id="fileName">Click to choose file</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passwordInput">Set Password</label>
+                    <input type="password" id="passwordInput" placeholder="Enter a strong password" required>
+                    <div class="hint">This password is required to decrypt and view the image.</div>
+                </div>
+                
+                <button class="btn-primary" onclick="generateCode()">Generate Secure Link</button>
+                
+                <div id="codeResult" class="result hidden">
+                    <div class="result-title">✓ Link Generated</div>
+                    <textarea id="generatedCode" readonly></textarea>
+                    <button class="btn-secondary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    <div class="hint">Share this link and password securely with your recipient.</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <!-- IMAGE 2 UPDATED -->
+                <img src="https://i.ibb.co/9msvvNQW/IMG-0f01f9d3-c543-444f-890f-c058b6b3d9e1.jpg" alt="DGTL Banner" class="card-banner">
+                <div class="card-header">
+                    <div class="card-icon">🔓</div>
+                    <div class="card-title">Decrypt Photo</div>
+                </div>
+                <p>Paste the secure link below and enter the password to decrypt the image.</p>
+                
+                <div class="form-group">
+                    <label for="viewCodeInput">Paste Secure Link</label>
+                    <textarea id="viewCodeInput" placeholder="Paste the secure link here..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="viewPasswordInput">Enter Password</label>
+                    <input type="password" id="viewPasswordInput" placeholder="Enter the decryption password" required>
+                </div>
+                
+                <button class="btn-primary" onclick="viewImage()">Decrypt & View Image</button>
+                
+                <div id="imageResult" class="result hidden">
+                    <div class="result-title">✓ Decryption Successful</div>
+                    <img id="hiddenImage" class="image-preview">
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Use DGTL Photo Hide:</h3>
+            <ol>
+                <li><strong>Encrypt:</strong> Select an image, set a strong password, and generate a secure link.</li>
+                <li><strong>Share:</strong> Send the link and password to your recipient through different channels for maximum security.</li>
+                <li><strong>Decrypt:</strong> Recipient pastes the link, enters the password, and views the image.</li>
+                <li><strong>Security:</strong> The image is stored locally and accessible only with the correct password.</li>
+            </ol>
+        </div>
+        
+        <div class="footer">
+            DGTL Photo Hide by Afrid © 2026 | Cyber Tech
+        </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Click to choose file';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function generateCode() {
+            const fileInput = document.getElementById('imageInput');
+            const passwordInput = document.getElementById('passwordInput');
+            
+            if (!fileInput.files[0]) {
+                showNotification('Please select an image first', 'error');
+                return;
+            }
+            
+            if (!passwordInput.value) {
+                showNotification('Please enter a password', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                
+                const data = {
+                    image: imageData,
+                    password: passwordInput.value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                fetch('/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const code = data.code;
+                        const url = window.location.origin + '/view.html?code=' + encodeURIComponent(code);
+                        document.getElementById('generatedCode').value = url;
+                        document.getElementById('codeResult').classList.remove('hidden');
+                        showNotification('Secure link generated successfully!');
+                    } else {
+                        showNotification('Error: ' + data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('An error occurred', 'error');
+                });
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+        
+        function viewImage() {
+            const codeInput = document.getElementById('viewCodeInput');
+            const passwordInput = document.getElementById('viewPasswordInput');
+            
+            if (!codeInput.value) {
+                showNotification('Please enter a link', 'error');
+                return;
+            }
+            
+            if (!passwordInput.value) {
+                showNotification('Please enter the password', 'error');
+                return;
+            }
+            
+            let code = codeInput.value;
+            if (code.includes('/view.html?code=')) {
+                const urlParams = new URLSearchParams(code.split('?')[1]);
+                code = urlParams.get('code');
+            }
+            
+            fetch('/view', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code: code,
+                    password: passwordInput.value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('hiddenImage').src = data.image;
+                    document.getElementById('imageResult').classList.remove('hidden');
+                    showNotification('Image decrypted successfully!');
+                } else {
+                    showNotification('Error: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('An error occurred', 'error');
+            });
+        }
+        
+        function copyToClipboard() {
+            const textarea = document.getElementById('generatedCode');
+            textarea.select();
+            document.execCommand('copy');
+            showNotification('Link copied to clipboard!');
+        }
+        
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            if (code) {
+                document.getElementById('viewCodeInput').value = code;
+                document.getElementById('viewPasswordInput').focus();
+            }
+        };
+    </script>
+</body>
+</html>
